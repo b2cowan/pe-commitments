@@ -41,6 +41,9 @@ body {
 /* div {
   outline: 1px solid red;
 } */
+input {
+  margin: 5px;
+}
 
 .App {
   width: 75%;
@@ -72,6 +75,8 @@ body {
     background-color: white;
   }
 
-
+.Writeup {
+align-self: right;
+}
 
 /* } */

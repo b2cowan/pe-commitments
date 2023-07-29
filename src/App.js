@@ -2,6 +2,7 @@ import ReactModal from "react-modal";
 import React, { useState } from "react";
 import Select from "react-select";
 import "./App.css";
+import Writeup from "./Writeup.js";
 import { findCommitments } from "./pe-commitment-estimates.js";
 import {
   bOCapitalRates,
@@ -38,6 +39,7 @@ function App() {
   const [startDate, setStartDate] = useState(years2[0].value);
   const [endDate, setEndDate] = useState(years2[4].value);
   const [isOpen, setIsOpen] = useState(false);
+  const [docIsOpen, setDocIsOpen] = useState(false);
   const [postDistRates, setPostDistRates] = useState(bOPostDistRates);
   const [cumCapital, setCumCapital] = useState(bOCapitalRates);
 
@@ -58,7 +60,7 @@ function App() {
     let newN = e.value - startDate + 1;
     setEndDate(e.value);
     setTestInfo({ ...testInfo, n: newN });
-    console.log("StartDate: ", startDate);
+    console.log("StartDdoate: ", startDate);
     console.log("EndDate: ", endDate);
     console.log(newN);
   };
@@ -195,6 +197,7 @@ function App() {
               onChange={handleChange}
             />
           </label>
+          <p></p>
           <label>
             Start Year:
             <Select
@@ -282,6 +285,25 @@ function App() {
             </text> */}
           </div>
         </form>
+        <div
+          style={{
+            // paddingLeft: "25px",
+            paddingBottom: "10px",
+          }}
+        >
+          <button onClick={() => setDocIsOpen(true)}>Writeup</button>
+        </div>
+        <ReactModal
+          ariaHideApp={false}
+          isOpen={docIsOpen}
+          contentLabel="Writeup"
+          onRequestClose={() => setDocIsOpen(false)}
+          className="Writeup"
+          overlayClassName="Overlay"
+          backdropOpacity={1}
+        >
+          <Writeup />
+        </ReactModal>
       </div>
     </div>
   );
