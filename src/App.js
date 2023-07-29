@@ -8,7 +8,6 @@ import {
   bODistRates,
   bOPostDistRates,
   bOCapital,
-  year,
   years2,
 } from "./starters.js";
 
@@ -36,8 +35,8 @@ function App() {
 
   const [capitalRates, setCapitalRates] = useState(bOCapital);
   const [distRates, setDistRates] = useState(bODistRates);
-  const [startDate, setStartDate] = useState(year);
-  const [endDate, setEndDate] = useState(year);
+  const [startDate, setStartDate] = useState(years2[0].value);
+  const [endDate, setEndDate] = useState(years2[4].value);
   const [isOpen, setIsOpen] = useState(false);
   const [postDistRates, setPostDistRates] = useState(bOPostDistRates);
   const [cumCapital, setCumCapital] = useState(bOCapitalRates);
@@ -47,15 +46,21 @@ function App() {
   };
 
   const handleStartDate = (e) => {
-    let newN = endDate - e.value;
+    let newN = endDate - e.value + 1;
     setStartDate(e.value);
     setTestInfo({ ...testInfo, n: newN });
+    console.log("StartDate: ", startDate);
+    console.log("EndDate: ", endDate);
+    console.log(newN);
   };
 
   const handleEndDate = (e) => {
-    let newN = e.value - startDate;
+    let newN = e.value - startDate + 1;
     setEndDate(e.value);
     setTestInfo({ ...testInfo, n: newN });
+    console.log("StartDate: ", startDate);
+    console.log("EndDate: ", endDate);
+    console.log(newN);
   };
 
   const handleSubmit = (event) => {
@@ -190,18 +195,6 @@ function App() {
               onChange={handleChange}
             />
           </label>
-          {/* <br></br>
-        <label>
-          N:
-          <input
-            type="text"
-            name="n"
-            value={testInfo.n}
-            onChange={handleChange}
-          />
-        </label> */}
-          <br></br>
-
           <label>
             Start Year:
             <Select
@@ -211,7 +204,6 @@ function App() {
               defaultValue={years2[0]}
             />
           </label>
-
           <br></br>
           <label>
             End Year:

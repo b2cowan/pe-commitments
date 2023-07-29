@@ -13,14 +13,6 @@ var bODistRates = [
 ];
 
 var bOPostDistRates = [];
-// var growthRate = 0.025;
-
-// var PEMVAfterGrowth = currentPrivateEquityMV * (1 + growthRate) ** numYears;
-// var totalMVAfterGrowth = currentTotalMV * (1 + growthRate) ** numYears;
-
-// var requiredFunds =
-//   (PEMVAfterGrowth - totalMVAfterGrowth * newPrivateEquityWeight) /
-//   (newPrivateEquityWeight - 1);
 
 bODistRates.forEach((v) => {
   let r = 1 - v;
@@ -28,17 +20,8 @@ bODistRates.forEach((v) => {
 });
 
 const year = new Date().getFullYear();
-const years = Array.from(new Array(20), (val, idx) => idx + year);
 const years2 = Array.from(new Array(20), (val, idx) =>
   JSON.parse(`{"value": "${idx + year}", "label": "${idx + year}"}`)
 );
 
-export {
-  bOCapitalRates,
-  bODistRates,
-  bOPostDistRates,
-  bOCapital,
-  year,
-  years,
-  years2,
-};
+export { bOCapitalRates, bODistRates, bOPostDistRates, bOCapital, years2 };
