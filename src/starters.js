@@ -34,13 +34,9 @@ const years2 = Array.from(new Array(20), (val, idx) =>
 );
 
 export {
-  // newPrivateEquityWeight,
   bOCapitalRates,
   bODistRates,
   bOPostDistRates,
-  // PEMVAfterGrowth,
-  // totalMVAfterGrowth,
-  // requiredFunds,
   bOCapital,
   year,
   years,

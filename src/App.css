@@ -1,10 +1,9 @@
 table {
   border: 1px solid #ccc;
   border-collapse: collapse;
-  margin: 500;
-  padding: 500;
-  /* table-layout: fixed; */
+  table-layout: fixed;
   float: left;
+  /* width: 100%; */
 }
 
 table caption {
@@ -22,12 +21,14 @@ table th,
 table td {
   padding: .625em;
   text-align: center;
+  overflow: hidden;
+
 }
 
 table th {
   font-size: .85em;
   letter-spacing: .1em;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
 }
   
 
@@ -48,3 +49,29 @@ body {
   margin: auto;
   /* add this to contain floated children */
 }
+
+/* @media (min-width: 900px) { */
+
+  .Modal {
+    position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+  background-color: white;
+    padding: 20px;
+    border: 1px solid black;
+    box-shadow: 10px 10px 5px #888888;
+  }
+
+  .Overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: white;
+  }
+
+
+
+/* } */

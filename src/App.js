@@ -1,3 +1,4 @@
+import ReactModal from "react-modal";
 import React, { useState } from "react";
 import Select from "react-select";
 import "./App.css";
@@ -31,44 +32,38 @@ function App() {
     AnnualCommitment: "",
     results: {},
     isBuyOut: true,
-    distRates: bODistRates,
-    postDistRates: bOPostDistRates,
   });
 
   const [capitalRates, setCapitalRates] = useState(bOCapital);
   const [distRates, setDistRates] = useState(bODistRates);
   const [startDate, setStartDate] = useState(year);
   const [endDate, setEndDate] = useState(year);
+  const [isOpen, setIsOpen] = useState(false);
+  const [postDistRates, setPostDistRates] = useState(bOPostDistRates);
+  const [cumCapital, setCumCapital] = useState(bOCapitalRates);
 
   const handleChange = (event) => {
     setTestInfo({ ...testInfo, [event.target.name]: event.target.value });
-    console.log(event.target.name);
-    console.log(event.target.value);
-    console.log(years2);
   };
 
   const handleStartDate = (e) => {
     let newN = endDate - e.value;
     setStartDate(e.value);
     setTestInfo({ ...testInfo, n: newN });
-    console.log("StartDate: " + e.value);
-    console.log(newN);
   };
 
   const handleEndDate = (e) => {
     let newN = e.value - startDate;
     setEndDate(e.value);
     setTestInfo({ ...testInfo, n: newN });
-    console.log("EndDate: " + e.value);
-    console.log(newN);
   };
 
   const handleSubmit = (event) => {
     // prevents the submit button from refreshing the page
     event.preventDefault();
     let res = findCommitments(
-      testInfo.cumulativeCapital,
-      testInfo.postDistRates,
+      cumCapital,
+      postDistRates,
       Number(testInfo.gr),
       Number(testInfo.n)
     );
@@ -97,6 +92,7 @@ function App() {
         Number(res.sumCapFactors),
       results: res,
     });
+    // console.log(capitalRates);
   };
 
   const handleInputChange = (e, index, columnName) => {
@@ -105,48 +101,84 @@ function App() {
       let updatedValues = [...capitalRates];
       updatedValues[index] = Number(value);
       setCapitalRates(updatedValues);
+      let updatedCumRates = [];
+      let num = updatedValues.length;
+      let multFactor = 1;
+      while (num > 0) {
+        let idx = updatedValues.length - num;
+        let val = updatedValues[idx] * multFactor;
+        let mfNew = 1 - updatedValues[idx];
+        updatedCumRates.push(val);
+        num -= 1;
+        multFactor *= mfNew;
+      }
+      setCumCapital(updatedCumRates);
+      // console.log(updatedCumRates);
     } else if (columnName === "distRates") {
       let updatedValues = [...distRates];
       updatedValues[index] = Number(value);
       setDistRates(updatedValues);
+      let updatedPostDistRates = [];
+      updatedValues.forEach((v) => {
+        let r = 1 - v;
+        updatedPostDistRates.push(r);
+      });
+      setPostDistRates(updatedPostDistRates);
     }
+    // console.log("distRates: ", distRates);
+    // console.log("postDistRates: ", postDistRates);
   };
 
   return (
     <div className="App">
       <h1>Private Equity Commitment Projections</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>Year</th>
-            <th>Capital Rates</th>
-            <th>Distribution Rates</th>
-          </tr>
-        </thead>
-        <tbody>
-          {capitalRates.map((value, index) => (
-            <tr key={index}>
-              <td>{index + 1}</td>
-              <td>
-                <input
-                  type="number"
-                  step="0.0001"
-                  value={capitalRates[index]}
-                  onChange={(e) => handleInputChange(e, index, "capitalRates")}
-                />
-              </td>
-              <td>
-                <input
-                  type="number"
-                  step="0.0001"
-                  value={distRates[index]}
-                  onChange={(e) => handleInputChange(e, index, "distRates")}
-                />
-              </td>
+      <div style={{ paddingLeft: "25px", paddingBottom: "10px" }}>
+        <button onClick={() => setIsOpen(true)}>Set PE Model Details</button>
+      </div>
+      <ReactModal
+        ariaHideApp={false}
+        isOpen={isOpen}
+        contentLabel="Example Modal"
+        onRequestClose={() => setIsOpen(false)}
+        className="Modal"
+        overlayClassName="Overlay"
+        backdropOpacity={1}
+      >
+        <table>
+          <thead>
+            <tr>
+              <th>Year</th>
+              <th>Capital Rates</th>
+              <th>Distribution Rates</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {capitalRates.map((value, index) => (
+              <tr key={index}>
+                <td>{index + 1}</td>
+                <td>
+                  <input
+                    type="number"
+                    step="0.0001"
+                    value={capitalRates[index]}
+                    onChange={(e) =>
+                      handleInputChange(e, index, "capitalRates")
+                    }
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="0.0001"
+                    value={distRates[index]}
+                    onChange={(e) => handleInputChange(e, index, "distRates")}
+                  />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </ReactModal>
       <div style={{ float: "left", paddingLeft: "25px" }}>
         <form onSubmit={handleSubmit}>
           <label>
@@ -176,7 +208,7 @@ function App() {
               onChange={handleStartDate}
               autoFocus={true}
               options={years2}
-              className="selectClass"
+              defaultValue={years2[0]}
             />
           </label>
 
@@ -187,6 +219,7 @@ function App() {
               onChange={handleEndDate}
               autoFocus={true}
               options={years2}
+              defaultValue={years2[4]}
             />
           </label>
           <br></br>
@@ -241,20 +274,20 @@ function App() {
               Required Funds: <b>{formatter.format(testInfo.ReqFunds)}</b>
             </text>
           </div>
-          <p></p>
+          {/* <p></p>
           <div>
             <text>Total Weight Factor: {testInfo.results.sumCapFactors}</text>
-          </div>
+          </div> */}
           <p></p>
           <div>
             <h2>
               Required Commitments:{" "}
               {formatter.format(testInfo.AnnualCommitment)}
             </h2>
-            <br></br>
+            {/* <br></br>
             <text>
               Required Commitments = (Required Funds / Total Weight Factor)
-            </text>
+            </text> */}
           </div>
         </form>
       </div>
