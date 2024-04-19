@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 
-function WireProfile() {
+function App() {
   const [formData, setFormData] = useState({
-    input1: "",
-    input2: "",
-    input3: "",
-    input4: "",
-    input5: "",
-    input6: "",
+    ItemID: 12345,
+    ProfileName: "",
+    BankAccountNumber: "",
+    BankAccountName: "",
+    ABA: "",
+    SWIFT: "",
+    LocalBankIdentifier: "",
   });
   const [submittedData, setSubmittedData] = useState(null);
 
@@ -26,65 +27,67 @@ function WireProfile() {
 
   return (
     <div>
-      <h1>Form Submission</h1>
+      <h1>Wire Profile</h1>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="input1">Input 1:</label>
+          <label htmlFor="ProfileName">Profile Name:</label>
           <input
             type="text"
-            id="input1"
-            name="input1"
-            value={formData.input1}
+            id="ProfileName"
+            name="ProfileName"
+            value={formData.ProfileName}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="BankAccountNumber">Bank Account Number:</label>
+          <input
+            type="text"
+            id="BankAccountNumber"
+            name="BankAccountNumber"
+            value={formData.BankAccountNumber}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="BankAccountName">Bank Account Name:</label>
+          <input
+            type="text"
+            id="BankAccountName"
+            name="BankAccountName"
+            value={formData.BankAccountName}
             onChange={handleInputChange}
           />
         </div>
         <div>
-          <label htmlFor="input2">Input 2:</label>
+          <label htmlFor="ABA">ABA:</label>
           <input
             type="text"
-            id="input2"
-            name="input2"
-            value={formData.input2}
+            id="ABA"
+            name="ABA"
+            value={formData.ABA}
             onChange={handleInputChange}
           />
         </div>
         <div>
-          <label htmlFor="input3">Input 3:</label>
+          <label htmlFor="SWIFT">SWIFT:</label>
           <input
             type="text"
-            id="input3"
-            name="input3"
-            value={formData.input3}
+            id="SWIFT"
+            name="SWIFT"
+            value={formData.SWIFT}
             onChange={handleInputChange}
           />
         </div>
         <div>
-          <label htmlFor="input4">Input 4:</label>
+          <label htmlFor="LocalBankIdentifier">LocalBankIdentifier:</label>
           <input
             type="text"
-            id="input4"
-            name="input4"
-            value={formData.input4}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="input5">Input 5:</label>
-          <input
-            type="text"
-            id="input5"
-            name="input5"
-            value={formData.input5}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="input6">Input 6:</label>
-          <input
-            type="text"
-            id="input6"
-            name="input6"
-            value={formData.input6}
+            id="LocalBankIdentifier"
+            name="LocalBankIdentifier"
+            value={formData.LocalBankIdentifier}
             onChange={handleInputChange}
           />
         </div>
@@ -94,10 +97,17 @@ function WireProfile() {
         <div>
           <h2>Submitted Data:</h2>
           <pre>{JSON.stringify(submittedData, null, 2)}</pre>
+          <p>
+            This is what is submitted to the API for creating a profile or
+            updating a profile. Obviously make it in NT format, but that should
+            be super easy as I'm sure every page is templated. Functionally this
+            is pretty much it, or am I missing something?
+          </p>
+          <p>There's even required fields in the form! :)</p>
         </div>
       )}
     </div>
   );
 }
 
-export default WireProfile;
+export default App;
