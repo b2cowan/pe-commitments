@@ -1,7 +1,7 @@
 import ReactModal from "react-modal";
 import React, { useState } from "react";
 import Select from "react-select";
-import "./App.css";
+import "../App.css";
 import Writeup from "./Writeup.js";
 import { findCommitments } from "./pe-commitment-estimates.js";
 import {

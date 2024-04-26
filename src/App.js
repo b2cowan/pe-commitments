@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import WireProfile from "./WireProfile";
-import PEEstimates from "./PrivateEquityEstimates";
+import WireProfile from "./WireProfile/WireProfile";
+import PEEstimates from "./PEEstimates/PrivateEquityEstimates";
+import PortfolioBuilder from "./PortfolioBuilder/PortfolioBuilder";
 import TabGroup from "./HeaderButtons";
 
 function App() {
@@ -17,6 +18,8 @@ function App() {
         return <WireProfile />;
       case "PEEstimates":
         return <PEEstimates />;
+      case "PortfolioBuilder":
+        return <PortfolioBuilder />;
       default:
         return null;
     }
