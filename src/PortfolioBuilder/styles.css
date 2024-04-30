@@ -1,0 +1,7 @@
+.ag-theme-quartz,
+.ag-theme-quartz-dark {
+    /* disable all borders */
+    --ag-borders: none;
+    --ag-row-border-style: none;
+    /* --ag-font-size: 17px; */
+}

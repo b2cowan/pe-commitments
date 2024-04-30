@@ -5,12 +5,7 @@ import PortfolioBuilder from "./PortfolioBuilder/PortfolioBuilder";
 import TabGroup from "./HeaderButtons";
 
 function App() {
-  const [activePage, setActivePage] = useState("WireProfile");
-
-  // const toggleComponent = (component) => {
-  //   setDisplay(component);
-  //   console.log(TabGroup.active);
-  // };
+  const [activePage, setActivePage] = useState("PortfolioBuilder");
 
   const renderPage = () => {
     switch (activePage) {
