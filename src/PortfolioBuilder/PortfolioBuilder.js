@@ -5,10 +5,22 @@ import { useState } from "react";
 import ReactModal from "react-modal";
 import "../App.css";
 import "./styles.css";
+import styled from "styled-components";
 import { findStockDetails, findStockList } from "./APIFetches";
 
 //  set variable for using testing data
 const useSeeds = false;
+
+const Button = styled.button`
+  color: black;
+  font-size: 12;
+  margin: 0;
+  border: 2px solid #1f5323;
+  border-radius: 3px;
+  &:hover {
+    background: #9ee9a4;
+  }
+`;
 
 function PortfolioContribution() {
   const [stockSearchList, setstockSearchList] = useState([]);
@@ -18,9 +30,9 @@ function PortfolioContribution() {
   const [stockListIsOpen, setStockListIsOpen] = useState(false);
   const [fundamentalsIsOpen, setFundamentalsIsOpen] = useState(false);
 
-  const SelectButton = (props) => {
+  const DetailsButton = (props) => {
     return (
-      <button
+      <Button
         onClick={async (e) => {
           e.preventDefault();
           const ticker = props.api.getSelectedRows()[0].ticker;
@@ -30,16 +42,42 @@ function PortfolioContribution() {
           setFundamentalsIsOpen(true);
         }}
       >
-        Security Details
-      </button>
+        Details
+      </Button>
+    );
+  };
+
+  const SelectButton = (props) => {
+    return (
+      <Button
+        onClick={async (e) => {
+          e.preventDefault();
+          const ticker = props.api.getSelectedRows()[0].ticker;
+          // console.log(ticker);
+          setTickerSelect(ticker);
+          setStockListIsOpen(false);
+        }}
+      >
+        Select
+      </Button>
     );
   };
 
   const [colDefs] = useState([
-    { field: "name", flex: 2 },
+    {
+      field: "name",
+      flex: 2.5,
+    },
     { field: "ticker", flex: 1 },
-    { field: "asset type", flex: 1 },
-    { field: "", flex: 1, cellRenderer: SelectButton },
+    { field: "securityType", flex: 1.5 },
+    {
+      field: "",
+      flex: 0.85,
+      cellRenderer: DetailsButton,
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    { field: "", flex: 0.85, cellRenderer: SelectButton },
   ]);
 
   const [fundamentalColDefs] = useState([
@@ -66,12 +104,6 @@ function PortfolioContribution() {
   const closeFundamentals = () => {
     setFundamentalsIsOpen(false);
     setStockListIsOpen(true);
-  };
-
-  const onSelectionChanged = (props) => {
-    const ticker = props.api.getSelectedRows()[0].ticker;
-    setTickerSelect(ticker);
-    setStockListIsOpen(false);
   };
 
   const handleTickerSubmit = async (e) => {
@@ -116,7 +148,7 @@ function PortfolioContribution() {
               rowData={stockSearchList}
               columnDefs={colDefs}
               rowSelection="single"
-              onSelectionChanged={onSelectionChanged}
+              // onSelectionChanged={onSelectionChanged}
               // rowStyle={{ background: "#ff7979" }}
             />
           </div>

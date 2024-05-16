@@ -81,12 +81,20 @@ const findStockList = async (search_text, testing = true) => {
     );
     responseData = response.data.results;
   }
+
   let newStockSeeds = [];
   for (let i = 0, l = responseData.length; i < l; i++) {
+    if (responseData[i].type)
+      responseData[i].sec_type = secTypeMapping.find(
+        ({ code }) => code === responseData[i].type
+      ).description;
+    else responseData[i].sec_type = "";
+    console.log(responseData[i].sec_type);
+
     newStockSeeds.push({
       name: responseData[i]["name"],
       ticker: responseData[i]["ticker"],
-      market: responseData[i]["market"],
+      securityType: responseData[i]["sec_type"],
     });
   }
   // setstockSearchList(newStockSeeds);
