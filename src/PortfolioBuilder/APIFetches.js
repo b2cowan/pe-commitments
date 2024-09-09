@@ -89,7 +89,7 @@ const findStockList = async (search_text, testing = true) => {
         ({ code }) => code === responseData[i].type
       ).description;
     else responseData[i].sec_type = "";
-    console.log(responseData[i].sec_type);
+    // console.log(responseData[i].sec_type);
 
     newStockSeeds.push({
       name: responseData[i]["name"],

@@ -28,7 +28,9 @@ function PortfolioContribution() {
   const [stockFundamentals, setstockFundamentals] = useState([]);
   const [tickerSelect, setTickerSelect] = useState();
   const [stockListIsOpen, setStockListIsOpen] = useState(false);
+  const [tranEntryIsOpen, setTranEntryIsOpen] = useState(false);
   const [fundamentalsIsOpen, setFundamentalsIsOpen] = useState(false);
+  const [transactionList, setTransactionList] = useState([]);
 
   const DetailsButton = (props) => {
     return (
@@ -53,12 +55,29 @@ function PortfolioContribution() {
         onClick={async (e) => {
           e.preventDefault();
           const ticker = props.api.getSelectedRows()[0].ticker;
-          // console.log(ticker);
+          // console.log(props.api.getSelectedRows());
           setTickerSelect(ticker);
           setStockListIsOpen(false);
+          setTranEntryIsOpen(true);
         }}
       >
         Select
+      </Button>
+    );
+  };
+
+  const TransactionEntryButton = (props) => {
+    return (
+      <Button
+        onClick={async (e) => {
+          e.preventDefault();
+          const tran = props.api.getSelectedRows()[0];
+          setTransactionList((origList) => [...origList, tran]);
+          setTickerSelect();
+          setTranEntryIsOpen(false);
+        }}
+      >
+        Set Transaction
       </Button>
     );
   };
@@ -78,6 +97,70 @@ function PortfolioContribution() {
       alignItems: "center",
     },
     { field: "", flex: 0.85, cellRenderer: SelectButton },
+  ]);
+
+  const [transactionCols] = useState([
+    {
+      field: "ticker",
+      flex: 1,
+    },
+    {
+      field: "date",
+      cellEditor: "agDateStringCellEditor",
+      editable: true,
+      flex: 1,
+    },
+    {
+      field: "tranType",
+      cellEditor: "agSelectCellEditor",
+      cellEditorParams: {
+        values: ["Buy", "Sell"],
+        filterList: true,
+        searchType: "match",
+        allowTyping: true,
+        valueListMaxHeight: 220,
+      },
+      editable: true,
+      flex: 1,
+    },
+    {
+      field: "numShares",
+      cellEditor: "agNumberCellEditor",
+      editable: true,
+      flex: 1,
+    },
+    {
+      field: "price",
+      cellEditor: "agNumberCellEditor",
+      editable: true,
+      flex: 1,
+    },
+
+    { field: "", flex: 1.25, cellRenderer: TransactionEntryButton },
+  ]);
+
+  const [transactionListCols] = useState([
+    {
+      field: "ticker",
+      flex: 1,
+    },
+    {
+      field: "date",
+      flex: 1,
+    },
+    {
+      field: "tranType",
+      flex: 1,
+    },
+    {
+      field: "numShares",
+
+      flex: 1,
+    },
+    {
+      field: "price",
+      flex: 1,
+    },
   ]);
 
   const [fundamentalColDefs] = useState([
@@ -117,6 +200,7 @@ function PortfolioContribution() {
       formJson["tickerInput"],
       useSeeds
     );
+    await e.target.reset();
 
     setstockSearchList(stockListResults);
   };
@@ -127,7 +211,7 @@ function PortfolioContribution() {
         <form method="post" onSubmit={handleTickerSubmit}>
           <label>
             Enter Ticker:
-            <input name="tickerInput" />
+            <input name="tickerInput" id="tickerInput" />
           </label>
           <hr />
           <button type="submit" onClick={() => setStockListIsOpen(true)}>
@@ -148,8 +232,6 @@ function PortfolioContribution() {
               rowData={stockSearchList}
               columnDefs={colDefs}
               rowSelection="single"
-              // onSelectionChanged={onSelectionChanged}
-              // rowStyle={{ background: "#ff7979" }}
             />
           </div>
         </ReactModal>
@@ -183,9 +265,55 @@ function PortfolioContribution() {
             </div>
           </div>
         </ReactModal>
-        <h1>
+        {/* <h1>
           {tickerSelect !== undefined ? `you selected: ${tickerSelect}` : ""}
-        </h1>
+        </h1> */}
+        <ReactModal
+          ariaHideApp={false}
+          isOpen={tranEntryIsOpen}
+          contentLabel="Transaction Entry Modal"
+          onRequestClose={() => setTranEntryIsOpen(false)}
+          className="Modal"
+          overlayClassName="Overlay"
+          backdropOpacity={1}
+        >
+          <h2>Enter Transaction Details</h2>
+          <div className="ag-theme-quartz" style={{ height: 300, width: 800 }}>
+            <AgGridReact
+              rowData={[
+                {
+                  ticker: tickerSelect,
+                  tranType: "Buy",
+                  numShares: 1,
+                  price: 100,
+                  date: "2010-01-01",
+                },
+              ]}
+              columnDefs={transactionCols}
+              rowSelection="single"
+              // headerHeight={0}
+              suppressRowHoverHighlight={true}
+              rowHeight={27}
+            />
+          </div>
+        </ReactModal>
+        {transactionList[0] !== undefined &&
+        tranEntryIsOpen == false &&
+        stockListIsOpen == false &&
+        fundamentalsIsOpen == false ? (
+          <div className="ag-theme-quartz" style={{ height: 300, width: 800 }}>
+            <AgGridReact
+              rowData={transactionList}
+              columnDefs={transactionListCols}
+              rowSelection="single"
+              // headerHeight={0}
+              suppressRowHoverHighlight={true}
+              rowHeight={27}
+            />
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     </>
   );
