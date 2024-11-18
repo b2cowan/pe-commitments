@@ -1,0 +1,88 @@
+
+.game-form {
+  margin: 0 1rem;
+  /* min-width: 600px; */
+  padding: 0;
+}
+
+p {
+  color: red;
+}
+
+.modal-p {
+  color: black;
+}
+
+.modal-footer {
+  /* padding: 0 0.5rem; */
+}
+
+.sortable-element {
+  display: flex;
+  flex-direction: row;
+}
+
+.bowler-list-item {
+  display: flex;
+}
+
+.drag-handle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 0.5rem;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.drag-handle h1 {
+  border: 1px solid black;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  line-height: 35px;
+  text-align: center;
+}
+
+.sort-drop-down {
+  /* display: none; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.5rem;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+fieldset {
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+.create-game-btns {
+  display: flex;
+  flex-direction: flex-start;
+}
+
+.create-game-btns button {
+  padding: 0 1rem;
+  margin: 0 0.25rem;
+}
+
+@media only screen and (min-width: 1200px) {
+  .form-container {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+
+/* @media (min-width: 769px) {
+  .sort-drop-down {
+    display: none;
+  }
+} */
+
+

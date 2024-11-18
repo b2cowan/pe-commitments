@@ -298,9 +298,9 @@ function PortfolioContribution() {
           </div>
         </ReactModal>
         {transactionList[0] !== undefined &&
-        tranEntryIsOpen == false &&
-        stockListIsOpen == false &&
-        fundamentalsIsOpen == false ? (
+        tranEntryIsOpen === false &&
+        stockListIsOpen === false &&
+        fundamentalsIsOpen === false ? (
           <div className="ag-theme-quartz" style={{ height: 300, width: 800 }}>
             <AgGridReact
               rowData={transactionList}

@@ -1,30 +1,8 @@
-import React, { useState } from "react";
-import WireProfile from "./WireProfile/WireProfile";
-import PEEstimates from "./PEEstimates/PrivateEquityEstimates";
-import PortfolioBuilder from "./PortfolioBuilder/PortfolioBuilder";
-import TabGroup from "./HeaderButtons";
+import React from "react";
+
+import Finance from "./Pages/Finance";
 
 function App() {
-  const [activePage, setActivePage] = useState("PortfolioBuilder");
-
-  const renderPage = () => {
-    switch (activePage) {
-      case "WireProfile":
-        return <WireProfile />;
-      case "PEEstimates":
-        return <PEEstimates />;
-      case "PortfolioBuilder":
-        return <PortfolioBuilder />;
-      default:
-        return null;
-    }
-  };
-
-  return (
-    <div>
-      <TabGroup activePage={activePage} setActivePage={setActivePage} />
-      {renderPage()}
-    </div>
-  );
+  return <Finance />;
 }
 export default App;

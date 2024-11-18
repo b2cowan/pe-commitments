@@ -1,0 +1,78 @@
+.frame {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    width: 100px;
+    padding: 0;
+    text-align: center;
+    margin: 1rem 0;    
+}
+
+.frame-sans-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 80%;
+}
+
+.frame-shots {
+    display: flex;
+    justify-content: flex-end;
+    height: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+.frame-shots input[type="text"] {
+    width: 33%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.frame-score {
+    text-align: center;
+    align-self: center;
+    display: flex;
+    width: 80%;
+    height: 100%;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    margin: 0;
+}
+
+.frame-score input[type="text"] {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    border: none;
+    text-align: center;
+    font-weight: 700;
+    font-size: 150%;
+}
+
+.frame-title {
+    border-bottom: 1px solid black;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+
+.frame-split-btn{
+    display: flex;
+    height: 20px;
+    margin-bottom: 1rem;
+    align-self: bottom;
+    justify-content: center;
+}
+
+.frame-split-btn span{
+    height: 10px;
+}
+
+/* .frame-ten {
+    border-radius: 0 8px 8px 0;
+} */

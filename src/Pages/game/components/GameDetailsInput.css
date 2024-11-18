@@ -1,0 +1,11 @@
+.game-details {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+    align-items: flex-start;
+}
+
+.game-details-input{
+    margin: 0 1rem;
+}
