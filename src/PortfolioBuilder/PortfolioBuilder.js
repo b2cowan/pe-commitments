@@ -315,6 +315,12 @@ function PortfolioContribution() {
           ""
         )}
       </div>
+      <p></p>
+      <iframe
+        width="960"
+        height="500"
+        src="https://us-east-1.quicksight.aws.amazon.com/sn/embed/share/accounts/324168792528/dashboards/4d00c4fc-5bc6-4015-87f9-1b2b7b3d49c7?directory_alias=fos-reporting-qs"
+      ></iframe>
     </>
   );
 }

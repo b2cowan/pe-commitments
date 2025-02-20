@@ -16,22 +16,10 @@ import PlayerGameInput from "../components/PlayerGameInput";
 import "./CreateGame.css";
 
 const bowlerData = [
-  {
-    firstName: "Bob",
-    lastName: "Cowan",
-  },
-  {
-    firstName: "Mark",
-    lastName: "Cowan",
-  },
-  {
-    firstName: "Pat",
-    lastName: "Hohman",
-  },
-  {
-    firstName: "Matt",
-    lastName: "Civak",
-  },
+  { id: "1", firstName: "Bob", lastName: "Cowan" },
+  { id: "2", firstName: "Mark", lastName: "Cowan" },
+  { id: "3", firstName: "Pat", lastName: "Hohman" },
+  { id: "4", firstName: "Matt", lastName: "Civak" },
 ];
 
 const CreateGame = () => {
