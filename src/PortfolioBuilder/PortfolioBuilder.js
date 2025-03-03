@@ -315,17 +315,6 @@ function PortfolioContribution() {
           ""
         )}
       </div>
-      <p></p>
-      <iframe
-        width="960"
-        height="500"
-        src="https://us-east-1.quicksight.aws.amazon.com/sn/embed/share/accounts/324168792528/dashboards/4d00c4fc-5bc6-4015-87f9-1b2b7b3d49c7?directory_alias=fos-reporting-qs"
-      ></iframe>
-      <iframe
-        width="960"
-        height="500"
-        src="https://us-east-1.quicksight.aws.amazon.com/sn/embed/share/accounts/324168792528/dashboards/4d00c4fc-5bc6-4015-87f9-1b2b7b3d49c7/sheets/4d00c4fc-5bc6-4015-87f9-1b2b7b3d49c7_9733dda9-d598-4210-baf2-e52e644c8bd9/visuals/4d00c4fc-5bc6-4015-87f9-1b2b7b3d49c7_9b8f468d-48fa-49d6-924e-acbf3efaea65?directory_alias=fos-reporting-qs"
-      ></iframe>
     </>
   );
 }

@@ -1,7 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 
-const pages = ["WireProfile", "PEEstimates", "PortfolioBuilder", "Bowling"];
+const pages = [
+  "WireProfile",
+  "PEEstimates",
+  "PortfolioBuilder",
+  "Bowling",
+  "Dashboard",
+];
 
 const Tab = styled.button`
   padding: 10px 30px;
