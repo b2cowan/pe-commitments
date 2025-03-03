@@ -28,18 +28,36 @@ const Dashboard = () => {
   const [asOfDate, setAsOfDate] = useState("2024-12-31");
   const [fundID, setFundID] = useState("3144");
   const [quickSightUrls, setQuickSightUrls] = useState([
-    "https://us-east-1.quicksight.aws.amazon.com/sn/embed/share/accounts/324168792528/dashboards/4d00c4fc-5bc6-4015-87f9-1b2b7b3d49c7/sheets/4d00c4fc-5bc6-4015-87f9-1b2b7b3d49c7_9733dda9-d598-4210-baf2-e52e644c8bd9/visuals/4d00c4fc-5bc6-4015-87f9-1b2b7b3d49c7_9b8f468d-48fa-49d6-924e-acbf3efaea65?directory_alias=fos-reporting-qs",
-    "https://us-east-1.quicksight.aws.amazon.com/sn/embed/share/accounts/324168792528/dashboards/4d00c4fc-5bc6-4015-87f9-1b2b7b3d49c7/sheets/4d00c4fc-5bc6-4015-87f9-1b2b7b3d49c7_9733dda9-d598-4210-baf2-e52e644c8bd9/visuals/4d00c4fc-5bc6-4015-87f9-1b2b7b3d49c7_71156084-7e9d-4efe-bb4f-efc12922c0e0?directory_alias=fos-reporting-qs",
-    `https://us-east-1.quicksight.aws.amazon.com/sn/embed/share/accounts/324168792528/dashboards/4d00c4fc-5bc6-4015-87f9-1b2b7b3d49c7/sheets/4d00c4fc-5bc6-4015-87f9-1b2b7b3d49c7_9733dda9-d598-4210-baf2-e52e644c8bd9/visuals/4d00c4fc-5bc6-4015-87f9-1b2b7b3d49c7_8aaeb34e-4efc-4980-a456-2e974f5e8fac?directory_alias=fos-reporting-qs&FundID=${fundID}&ToDate=${asOfDate}`,
+    {
+      url: "https://us-east-1.quicksight.aws.amazon.com/sn/embed/share/accounts/324168792528/dashboards/4d00c4fc-5bc6-4015-87f9-1b2b7b3d49c7/sheets/4d00c4fc-5bc6-4015-87f9-1b2b7b3d49c7_9733dda9-d598-4210-baf2-e52e644c8bd9/visuals/4d00c4fc-5bc6-4015-87f9-1b2b7b3d49c7_9b8f468d-48fa-49d6-924e-acbf3efaea65?directory_alias=fos-reporting-qs",
+      label: "Classification Systems",
+    },
+    {
+      url: "https://us-east-1.quicksight.aws.amazon.com/sn/embed/share/accounts/324168792528/dashboards/4d00c4fc-5bc6-4015-87f9-1b2b7b3d49c7/sheets/4d00c4fc-5bc6-4015-87f9-1b2b7b3d49c7_9733dda9-d598-4210-baf2-e52e644c8bd9/visuals/4d00c4fc-5bc6-4015-87f9-1b2b7b3d49c7_71156084-7e9d-4efe-bb4f-efc12922c0e0?directory_alias=fos-reporting-qs",
+      label: "Upcoming Wires",
+    },
+    {
+      url: `https://us-east-1.quicksight.aws.amazon.com/sn/embed/share/accounts/324168792528/dashboards/4d00c4fc-5bc6-4015-87f9-1b2b7b3d49c7/sheets/4d00c4fc-5bc6-4015-87f9-1b2b7b3d49c7_9733dda9-d598-4210-baf2-e52e644c8bd9/visuals/4d00c4fc-5bc6-4015-87f9-1b2b7b3d49c7_8aaeb34e-4efc-4980-a456-2e974f5e8fac?directory_alias=fos-reporting-qs&FundID=${fundID}&ToDate=${asOfDate}`,
+      label: "Performance",
+    },
   ]);
 
   const rowHeight = 100;
 
   useEffect(() => {
     setQuickSightUrls([
-      "https://us-east-1.quicksight.aws.amazon.com/sn/embed/share/accounts/324168792528/dashboards/4d00c4fc-5bc6-4015-87f9-1b2b7b3d49c7/sheets/4d00c4fc-5bc6-4015-87f9-1b2b7b3d49c7_9733dda9-d598-4210-baf2-e52e644c8bd9/visuals/4d00c4fc-5bc6-4015-87f9-1b2b7b3d49c7_9b8f468d-48fa-49d6-924e-acbf3efaea65?directory_alias=fos-reporting-qs",
-      "https://us-east-1.quicksight.aws.amazon.com/sn/embed/share/accounts/324168792528/dashboards/4d00c4fc-5bc6-4015-87f9-1b2b7b3d49c7/sheets/4d00c4fc-5bc6-4015-87f9-1b2b7b3d49c7_9733dda9-d598-4210-baf2-e52e644c8bd9/visuals/4d00c4fc-5bc6-4015-87f9-1b2b7b3d49c7_71156084-7e9d-4efe-bb4f-efc12922c0e0?directory_alias=fos-reporting-qs",
-      `https://us-east-1.quicksight.aws.amazon.com/sn/embed/share/accounts/324168792528/dashboards/4d00c4fc-5bc6-4015-87f9-1b2b7b3d49c7/sheets/4d00c4fc-5bc6-4015-87f9-1b2b7b3d49c7_9733dda9-d598-4210-baf2-e52e644c8bd9/visuals/4d00c4fc-5bc6-4015-87f9-1b2b7b3d49c7_8aaeb34e-4efc-4980-a456-2e974f5e8fac?directory_alias=fos-reporting-qs&FundID=${fundID}&ToDate=${asOfDate}`,
+      {
+        url: "https://us-east-1.quicksight.aws.amazon.com/sn/embed/share/accounts/324168792528/dashboards/4d00c4fc-5bc6-4015-87f9-1b2b7b3d49c7/sheets/4d00c4fc-5bc6-4015-87f9-1b2b7b3d49c7_9733dda9-d598-4210-baf2-e52e644c8bd9/visuals/4d00c4fc-5bc6-4015-87f9-1b2b7b3d49c7_9b8f468d-48fa-49d6-924e-acbf3efaea65?directory_alias=fos-reporting-qs",
+        label: "Classification Systems",
+      },
+      {
+        url: "https://us-east-1.quicksight.aws.amazon.com/sn/embed/share/accounts/324168792528/dashboards/4d00c4fc-5bc6-4015-87f9-1b2b7b3d49c7/sheets/4d00c4fc-5bc6-4015-87f9-1b2b7b3d49c7_9733dda9-d598-4210-baf2-e52e644c8bd9/visuals/4d00c4fc-5bc6-4015-87f9-1b2b7b3d49c7_71156084-7e9d-4efe-bb4f-efc12922c0e0?directory_alias=fos-reporting-qs",
+        label: "Upcoming Wires",
+      },
+      {
+        url: `https://us-east-1.quicksight.aws.amazon.com/sn/embed/share/accounts/324168792528/dashboards/4d00c4fc-5bc6-4015-87f9-1b2b7b3d49c7/sheets/4d00c4fc-5bc6-4015-87f9-1b2b7b3d49c7_9733dda9-d598-4210-baf2-e52e644c8bd9/visuals/4d00c4fc-5bc6-4015-87f9-1b2b7b3d49c7_8aaeb34e-4efc-4980-a456-2e974f5e8fac?directory_alias=fos-reporting-qs&FundID=${fundID}&ToDate=${asOfDate}`,
+        label: "Performance",
+      },
     ]);
   }, [fundID, asOfDate]);
 
@@ -47,9 +65,9 @@ const Dashboard = () => {
     setWidgets((prevWidgets) =>
       prevWidgets.map((widget) => {
         const baseUrl =
-          quickSightUrls.find((url) =>
-            url.includes(widget.url.split("?")[0])
-          ) || widget.url.split("?")[0];
+          quickSightUrls.find((item) =>
+            item.url.includes(widget.url.split("?")[0])
+          )?.url || widget.url.split("?")[0];
         return {
           ...widget,
           url: `${baseUrl}${
@@ -112,13 +130,13 @@ const Dashboard = () => {
           <option value="3146">3146</option>
         </select>
         <Button onClick={reRenderIframes} className="ml-2">
-          Update Parameters
+          Re-render Iframes
         </Button>
       </div>
       <div className="mb-4 space-x-2">
-        {quickSightUrls.map((url, index) => (
-          <Button key={index} onClick={() => addWidget(url)}>
-            Add QuickSight {index + 1}
+        {quickSightUrls.map((item, index) => (
+          <Button key={index} onClick={() => addWidget(item.url)}>
+            {item.label}
           </Button>
         ))}
       </div>
